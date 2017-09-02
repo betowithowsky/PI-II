@@ -8,6 +8,7 @@ import java.awt.event.ItemListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +31,7 @@ public class Main {
     public static void main(String[] args) {
         
         Runnable thread = new Runnable() {
-            
+            //Classe Anonima Onde ficam os threads
             public void run() {
                 
                 criarGUI();
@@ -38,7 +39,7 @@ public class Main {
             }
             
         };
-        
+        //executa a funcão acima
         SwingUtilities.invokeLater(thread);
     }
     
@@ -72,11 +73,15 @@ public class Main {
         //Defique oque vai ter dentro do JLabel
         JLabel label = new JLabel("Olá, Mundo!");
         
+        //Menu Drop Down
+        String[] opcoesCombo = {"Selecionae", "Opção 01", "Opção 02","Opção 03", "Opçãs 04"};
+        JComboBox comboBox = new JComboBox(opcoesCombo);
+                
         //Define oque tem escrito dentro do botao
         JButton button = new JButton("Button");
         JButton button2 =  new JButton("Botao 02");
 
-        //Classe Anonima Button
+        //Classe Anonima Button - adiciona uma ação para o button
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,16 +98,21 @@ public class Main {
                  }
                 }
             });
-           
+        
+        //Adiciona uma ação Para o Botão 2
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Item 01 selecionado: " + checkBox01.isSelected() +
                                                     "\n item 02 selecionado" + checkBox02.isSelected() +
                                                     "\nRadio 01 Selecionado" + radio01.isSelected() +
-                                                    "\nRadio 02 Selecionado" + radio02.isSelected()); 
+                                                    "\nRadio 02 Selecionado" + radio02.isSelected()+
+                                                    "\nComboBox: " +comboBox.getSelectedItem()); 
             }
         });
+        
+        
+        
         //Criando um Panel
         frame.getContentPane().add(panel);
         
@@ -119,6 +129,8 @@ public class Main {
         
         panel.add(radio01);
         panel.add(radio02);    
+        
+        panel.add(comboBox);
         
         //Cria o Grupo de RadioBotton - onde o usuario só consegue selecionar um dos botoes.
         ButtonGroup group = new ButtonGroup();
